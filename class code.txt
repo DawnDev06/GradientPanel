@@ -1,0 +1,24 @@
+ public GradientPanel()
+ {
+     ColorTop = Color.FromArgb(255,255,255);
+     ColorBottom = Color.FromArgb(255,165,165);
+     this.DoubleBuffered = true;
+ }
+
+ [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+ public Color ColorTop { get; set; }
+ [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+ public Color ColorBottom { get; set; }
+
+ protected override void OnPaint(PaintEventArgs e)
+ {
+     if (ClientRectangle.Width <= 0 || ClientRectangle.Height <= 0)
+     {
+         return;
+     }
+     using (LinearGradientBrush lbg = new LinearGradientBrush(this.ClientRectangle, this.ColorTop, this.ColorBottom, 90F))
+     {
+         e.Graphics.FillRectangle(lbg, this.ClientRectangle);
+     }
+         base.OnPaint(e);
+ }
